@@ -1,8 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:todolist/create_screen.dart';
+import 'package:todolist/todo.dart';
 
-class ListScreen extends StatelessWidget {
+class ListScreen extends StatefulWidget {
   const ListScreen({super.key});
+
+  @override
+  State<ListScreen> createState() => _ListScreenState();
+}
+
+class _ListScreenState extends State<ListScreen> {
+  final todos = [
+    Todo(title: 'title 1', dateTime: 12321),
+    Todo(title: 'title 2', dateTime: 12321),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -11,22 +22,17 @@ class ListScreen extends StatelessWidget {
         title: const Text('Todo 리스트'),
       ),
       body: ListView(
-        children: const [
-          ListTile(
-            title: Text('title 1'),
-            subtitle: Text('subTitle 1'),
-          ),
-          ListTile(
-            title: Text('title 2'),
-            subtitle: Text('subTitle 2'),
-          ),
-        ],
+        children: todos
+            .map((todo) => ListTile(
+                  title: Text(todo.title),
+                  subtitle: Text('${todo.dateTime}'),
+                )).toList(),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder:(context) => const CreateScreen()),
+            MaterialPageRoute(builder: (context) => const CreateScreen()),
           );
         },
         child: const Icon(Icons.add),
