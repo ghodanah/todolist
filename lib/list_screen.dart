@@ -27,9 +27,12 @@ class _ListScreenState extends State<ListScreen> {
                     todo.isDone = !todo.isDone;
                     await todo.save();
 
-                    setState(() {
+                    setState(() {});
+                  },
+                  onDelete: (todo) async {
+                    await todo.delete();
 
-                    });
+                    setState(() {});
                   },
                 ))
             .toList(),
